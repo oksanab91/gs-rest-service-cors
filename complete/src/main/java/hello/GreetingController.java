@@ -1,3 +1,4 @@
+//to open: http://localhost:8181/greeting?name=User
 package hello;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -13,7 +14,7 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @CrossOrigin(origins = "http://localhost:9000")
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(required=false, defaultValue="World") String name) {
         System.out.println("==== in greeting ====");
