@@ -3,10 +3,9 @@ package hello;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 @RestController
 public class GreetingController {
@@ -19,6 +18,13 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(required=false, defaultValue="World") String name) {
         System.out.println("==== in greeting ====");
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
+    }
+    @CrossOrigin(origins = "http://localhost:8080")
+    @GetMapping("/{name}/greeting")
+    public Greeting greetingWithName(@PathVariable("name") String name) {
+        System.out.println("==== in greeting ====");
+        System.out.println(name);
+        return new Greeting(226, String.format(template, name));
     }
 
     @GetMapping("/greeting-javaconfig")
